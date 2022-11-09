@@ -23,9 +23,10 @@ import SignUp from '../../Pages/SignUp/SignUp';
                     element: <SignUp></SignUp>
                 },
                 {
-                    path: '/Login',
+                    path: '/login',
                     element: <Login></Login>
-                },
+                }
+                
             ]
         }
     ])

@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import img from '../../assets/images/login/login.jfif'
-// import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
+import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 import { FaFacebook, FaGithub, FaGoogle } from 'react-icons/fa';
 
 const Login = () => {
 
-    // const {signIn, loginWithGoogle, logInWithGithub} = useContext(AuthContext)
+    const {signIn, loginWithGoogle, logInWithGithub} = useContext(AuthContext)
 
     const handleLogin = event =>{
         event.preventDefault();
@@ -15,39 +15,39 @@ const Login = () => {
         const password = form.password.value;
         console.log(email, password)
 
-        // signIn(email, password)
-        //     .then(result => {
-        //         const user = result.user;
-        //         console.log(user);
-        //         if(user.uid){
-        //             alert('Login successfully')
-        //         }
-        //     })
-        //     .catch(error => console.error(error))
+        signIn(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                if(user.uid){
+                    alert('Login successfully')
+                }
+            })
+            .catch(error => console.error(error))
             
     }
 
-    // const handlegoogleLogin = () => {
-    //     loginWithGoogle()
-    //         .then(result => {
-    //             const user = result.user;
-    //             console.log(user);
-    //             if(user.uid){
-    //                 alert(`Successfully Logged in as ${user?.displayName}`)
-    //             }
-    //         })
-    //         .catch(error => console.error(error))
-    // }
+    const handlegoogleLogin = () => {
+        loginWithGoogle()
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                if(user.uid){
+                    alert(`Successfully Logged in as ${user?.displayName}`)
+                }
+            })
+            .catch(error => console.error(error))
+    }
 
-    // const handlegithubLogin = () => {
-    //     return logInWithGithub()
-    //         .then(result => {
-    //             const user = result.user();
-    //             console.log(user)
-    //         })
-    //         .catch(error => console.error(error))
+    const handlegithubLogin = () => {
+        return logInWithGithub()
+            .then(result => {
+                const user = result.user();
+                console.log(user)
+            })
+            .catch(error => console.error(error))
 
-    // }
+    }
 
     return (
         <div>
@@ -80,8 +80,8 @@ const Login = () => {
                             </div>
                         </form>
                         <div className='text-center text-2xl'>
-                            {/* <button onClick={handlegoogleLogin} className='mx-2 text-red-600'><FaGoogle /></button> */}
-                            {/* <button onClick={handlegithubLogin} className='mx-2 text-gray-500'><FaGithub /></button> */}
+                            <button onClick={handlegoogleLogin} className='mx-2 text-red-600'><FaGoogle /></button>
+                            <button onClick={handlegithubLogin} className='mx-2 text-gray-500'><FaGithub /></button>
                             <button className='mx-2 text-blue-600'><FaFacebook /></button>
                         </div>
                         <p className='text-center'>New to Genius Car <Link className='text-orange-600 font-bold' to='/signup'>Sign Up</Link></p>

@@ -1,13 +1,32 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 import logo from '../../../logo1.png';
 
 const Header = () => {
+    const {user, logOut } = useContext(AuthContext)
+    console.log(user)
+
+    const handleSignOut = () => {
+        logOut()
+            .then( () => {})
+            .catch(error => console.log(error))
+
+    }
 
     const menuitems = <>
         <li className='font-bold'><Link to='/home'>Home</Link></li>
-        <li className='font-bold'><Link to='/signup'>SignUp</Link></li>
-        <li className='font-bold'><Link to='/login'>Login</Link></li>
+        {
+            user?.email ?
+            <>
+            <li className='font-bold'><Link to='/login'>Login</Link></li>
+            </>
+            :
+            <li className='font-bold'><Link to='/signup'>SignUp</Link></li>
+        }
+        <li><button onClick={handleSignOut} >logout</button></li>
+        
+        
     </>
     return (
         <div className="navbar bg-base-100">
@@ -18,7 +37,9 @@ const Header = () => {
                     </label>
                     <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                         {menuitems}
+                       
                     </ul>
+                    
                 </div>
                 <Link to="/"> <img className='w-24 h-24' src={logo} alt="" /></Link>
             </div>
@@ -28,6 +49,7 @@ const Header = () => {
                 </ul>
             </div>
             <div className="navbar-end">
+            <p>hello{user?.email}</p>
                 <a className="btn">Hire Me</a>
             </div>
         </div>
