@@ -6,6 +6,8 @@ const Header = () => {
 
     const menuitems = <>
         <li className='font-bold'><Link to='/home'>Home</Link></li>
+        <li className='font-bold'><Link to='/signup'>SignUp</Link></li>
+        <li className='font-bold'><Link to='/login'>Login</Link></li>
     </>
     return (
         <div className="navbar bg-base-100">
