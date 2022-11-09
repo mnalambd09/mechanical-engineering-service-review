@@ -7,10 +7,13 @@ const ServiceCard = ({ service }) => {
             <figure><img className='h-48 rounded-lg' src={picture} alt="Shoes" /></figure>
             <div className="card-body">
                 <h2 className="card-title">{title}</h2>
-                <p>{description.slice(0, 200)}</p>
-                <p>If a dog chews shoes whose shoes does he choose?</p>
-                <div className="card-actions justify-end">
-                    <button className="btn btn-primary">Buy Now</button>
+                <p>{description.slice(0, 200)}....</p>
+                <div className='flex flex-auto'>
+                    <p className='font-bold text-2xl'>Price : $<span className='text-orange-600'>{price}</span></p>
+                    <p className='font-bold text-2xl'>Rating : <span className='text-orange-600'>{rating}</span></p>
+                </div>
+                <div className="card-actions justify-center ">
+                    <button className="btn btn-success bg-green-600 text-white font-bold w-full">View Details</button>
                 </div>
             </div>
         </div>
