@@ -1,9 +1,49 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import { AuthContext } from '../../../../Context/AuthProvider/AuthProvider';
 
 
 const Reviews = ({ params }) => {
-    const { _id, title, price, picture, rating, description } = useLoaderData()
+    const {user} = useContext(AuthContext);
+    const { _id, title, price, picture, rating, description } = useLoaderData();
+
+    const handleReview = event => {
+        event.preventDefault();
+        const form = event.target;
+        const name = `${form.firstName.value} ${form.lastName.value}`;
+        const email = user?.email || 'undefined';
+        const url = form.url.value;
+        const message = form.message.value;
+
+        const review = {
+            service: _id,
+            reviewTitle: title,
+            price,
+            userName: name,
+            email,
+            url,
+            message
+
+        }
+
+        fetch('http://localhost:5000/review', {
+            method: 'POST',
+            headers: {
+                'content-type' : 'application/json'
+            },
+            body: JSON.stringify(review)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if(data.acknowledged){
+                    alert('Your Review has been placed Successfully')
+                    form.reset();
+                }
+            })
+            .catch(error => console.error(error));
+    }
+    
     
     return (
         <div className='text-center'>
@@ -18,10 +58,20 @@ const Reviews = ({ params }) => {
                     <p>Rating : {rating} </p>
                     </div>
                     <div className="card-actions justify-end">
-                        <button className="btn btn-primary">Learn now!</button>
+                        
                     </div>
                 </div>
             </div>
+            <form onSubmit={handleReview} className='rounded-lg shadow-lg shadow-black shadow-inner bg-green-200 mb-5 px-5'>
+                <div className='grid  grid-cols-1 lg:grid-cols-2 gap-4  pt-10 '>
+                    <input required name='firstName' type="text" placeholder='First Name' className='input input-ghost w-full border-spacing-2 bg-orange-600 text-white font-extrabold' />
+                    <input name='lastName' type="text" placeholder='Last Name' className='input input-ghost w-full border-spacing-2 bg-orange-600 text-white font-extrabold ' />
+                    <input required name='email' type="Email" placeholder='Your Email' className='input input-ghost w-full border-spacing-2 bg-orange-600 text-white font-extrabold' />
+                    <input name='url' type="url" placeholder='Image url' className='input input-ghost w-full border-spacing-2 bg-orange-600 text-white font-extrabold ' />
+                </div>
+                <textarea name='message' className="textarea textarea-accent w-full mt-5 border-spacing-2 bg-orange-600 text-white font-extrabold" placeholder="Wright Your Review"></textarea>
+                    <input type="submit" className="btn btn-primary mb-5" value="Submit Your Review" />
+            </form>
         </div>
     );
 };
