@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import image from '../../assets/images/login/signup.jpg';
 // import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 const SignUp = () => {
@@ -24,7 +25,7 @@ const SignUp = () => {
         <div className="hero w-full my-20">
             <div className="hero-content grid gap-20 md:grid-cols-2 flex-col lg:flex-row">
                 <div className="text-center lg:text-left">
-                    <img className='w-full' src={image} alt="" />
+                    <img className='w-full rounded rounded-xl' src={image} alt="" />
                 </div>
                 <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 py-20">
                     <form onSubmit={handleSignup} className="card-body">
@@ -54,7 +55,7 @@ const SignUp = () => {
                             
                         </div>
                     </form>
-                    {/* <p className='text-center'>Already have an account <Link className='text-orange-600 font-bold' to='/login'>Login</Link></p> */}
+                    <p className='text-center'>Already have an account <Link className='text-orange-600 font-bold' to='/login'>Login</Link></p>
                 </div>
             </div>
         </div>
