@@ -8,7 +8,7 @@ const About = () => {
             <div className="hero-content flex-col lg:flex-row">
                 <div className='w-1/2 relative'>
                 <img className='rounded-lg shadow-2xl w-4/5 h-full' src={person} alt="" />
-                <img className='rounded-lg shadow-2xl absolute w-3/5 right-5 top-1/2 border-8 h-52' src={parts} alt="" />
+                <img className='rounded-lg shadow-2xl absolute w-3/5 right-5 top-2/3 border-8 h-52' src={parts} alt="" />
                 </div>
                 <div className='w-1/2'>
                     <p className='text-2xl text-orange-600 font-bold'>About Me</p>

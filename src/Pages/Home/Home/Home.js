@@ -1,13 +1,14 @@
 import React from 'react';
 import Slider from '../Slider/Slider';
 import About from './About/About';
+import Progress from './Progress/Progress';
 
 const Home = () => {
     return (
         <div className='text-5xl'>
             <Slider></Slider>
             <About></About>
-            <h1>Hello From Home</h1>
+            <Progress></Progress>
         </div>
     );
 };
