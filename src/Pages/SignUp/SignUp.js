@@ -2,7 +2,9 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import image from '../../assets/images/login/signup.jpg';
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
+import useTitle from '../../hooks/useTitle';
 const SignUp = () => {
+    useTitle('Sign Up');
 
     const {createUser} = useContext(AuthContext)
 
@@ -47,7 +49,7 @@ const SignUp = () => {
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input type="text" name='password' required placeholder="Password" className="input input-bordered" />
+                            <input type="password" name='password' required placeholder="Password" className="input input-bordered" />
                             
                         </div>
                         <div className="form-control mt-6">

@@ -1,17 +1,21 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
+import useTitle from '../../../hooks/useTitle';
 import logo from '../../../logo1.png';
 
+
 const Header = () => {
+    useTitle('Header');
     const {user, logOut } = useContext(AuthContext)
     console.log(user)
+    
 
     const handleSignOut = () => {
         logOut()
             .then( () => {})
             .catch(error => console.log(error))
-
+           
     }
 
     const menuitems = <>
@@ -19,16 +23,25 @@ const Header = () => {
         {
             user?.email ?
             <>
-            <li className='font-bold'><Link to='/login'>Login</Link></li>
+            <li onClick={handleSignOut} className='font-bold'><Link to='/'>Logout</Link></li>
+            <li className='font-bold'><Link to='/review'>Reviews</Link></li>
             </>
             :
+            <>
+            <li className='font-bold'><Link to='/login'>Login</Link></li>
             <li className='font-bold'><Link to='/signup'>SignUp</Link></li>
+            
+            </>
+            
         }
-        <li><button onClick={handleSignOut} >logout</button></li>
+       
         
+        <li className='font-bold'><Link to='/blog'>Blog</Link></li>
+        <img src={user?.photoUrl} alt="" />
         
     </>
     return (
+        
         <div className="navbar bg-base-100">
             <div className="navbar-start">
                 <div className="dropdown">
@@ -37,7 +50,7 @@ const Header = () => {
                     </label>
                     <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                         {menuitems}
-                       
+                        
                     </ul>
                     
                 </div>
@@ -49,8 +62,10 @@ const Header = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-            <p>hello{user?.email}</p>
-                <a className="btn">Hire Me</a>
+            
+            <p>Hi {user?.displayName}</p>
+                {/* <a className="btn">Hire Me</a> */}
+                <img src={user?.photoUrl} alt="" />
             </div>
         </div>
     );

@@ -3,9 +3,11 @@ import { useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../../../Context/AuthProvider/AuthProvider';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import useTitle from '../../../../hooks/useTitle';
 
 
 const Reviews = ({ params }) => {
+    useTitle('Reviews');
     const notify = () => toast("Your Review has been placed Successfully");
     const { user } = useContext(AuthContext);
     const { _id, title, price, picture, rating, description } = useLoaderData();
@@ -29,7 +31,7 @@ const Reviews = ({ params }) => {
 
         }
 
-        fetch('http://localhost:5000/review', {
+        fetch('https://mechanical-engineering-service-server.vercel.app/review', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -71,7 +73,7 @@ const Reviews = ({ params }) => {
                 <div className='grid  grid-cols-1 lg:grid-cols-2 gap-4  pt-10 '>
                     <input required name='firstName' type="text" placeholder='First Name' className='input input-ghost w-full border-spacing-2 bg-orange-600 text-white font-extrabold' />
                     <input name='lastName' type="text" placeholder='Last Name' className='input input-ghost w-full border-spacing-2 bg-orange-600 text-white font-extrabold ' />
-                    <input required name='email' type="Email" placeholder='Your Email' className='input input-ghost w-full border-spacing-2 bg-orange-600 text-white font-extrabold' />
+                    <input required name='email' type="Email" placeholder='Your Email' defaultValue={user?.email} readOnly className='input input-ghost w-full border-spacing-2 bg-orange-600 text-white font-extrabold' />
                     <input name='url' type="url" placeholder='Image url' className='input input-ghost w-full border-spacing-2 bg-orange-600 text-white font-extrabold ' />
                 </div>
                 <textarea name='message' className="textarea textarea-accent w-full mt-5 border-spacing-2 bg-orange-600 text-white font-extrabold" placeholder="Wright Your Review"></textarea>

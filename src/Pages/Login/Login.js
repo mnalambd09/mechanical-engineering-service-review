@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 import img from '../../assets/images/login/login.jfif'
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 import { FaFacebook, FaGithub, FaGoogle } from 'react-icons/fa';
+import useTitle from '../../hooks/useTitle';
 
 const Login = () => {
+    useTitle('Login');
 
     const {signIn, loginWithGoogle, logInWithGithub} = useContext(AuthContext)
 
@@ -63,13 +65,13 @@ const Login = () => {
                                 <label className="label">
                                     <span className="label-text">Email</span>
                                 </label>
-                                <input type="text" name='email' placeholder="Email" required className="input input-bordered" />
+                                <input type="email" name='email' placeholder="Email" required className="input input-bordered" />
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Password</span>
                                 </label>
-                                <input type="text" required placeholder="Password" name='password' className="input input-bordered" />
+                                <input type="password" required placeholder="Password" name='password' className="input input-bordered" />
                                 <label className="label">
                                     <Link to={'/signup'} className="label-text-alt link link-hover">Forgot password?</Link>
                                 </label>
